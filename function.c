@@ -9,7 +9,7 @@ int get_size(int len,const char *format, va_list args)
 	int i, size, value;
 	char* str;
 
-	size = 0;
+	size = 1;
 	for (i = 0; i <= len; i++)
 	{
 		if (format[i] == '%')
@@ -22,8 +22,6 @@ int get_size(int len,const char *format, va_list args)
 			else if (format[i] == 'd' || format[i] == 'i')
 			{
 				value = va_arg(args, int);
-				if (value < 0)
-					size++;
 				str = from_int_to_string(value);
 				size += _strlen(str);
 			}

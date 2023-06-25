@@ -14,7 +14,7 @@
 int _printf(const char *format, ...)
 {
 	char *buf;
-	int size = 1;
+	int size;
 	va_list args;
 	int len = 0;
 	int i;
@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 	len = _strlen(format);
 	va_start(args, format);
 	va_end(args);
-	size += get_size(len, format, args);
+	size = get_size(len, format, args);
 	size++;
 	buf = malloc(size);
 	va_start(args, format);
@@ -43,11 +43,6 @@ int _printf(const char *format, ...)
 			{
 				value = va_arg(args, int);
 				str = from_int_to_string(value);
-				if (value < 0)
-				{
-					str_concat(i, buf, "-");
-					i++;
-				}
 				str_concat(i, buf, str);
 				i += _strlen(str);
 				j++;
@@ -75,20 +70,26 @@ char *from_int_to_string(int value)
 	int temp = value;
 	int dec = 0;
 	int len = 0;
+	int chk = 0;
 
 	if (value < 0)
 	{
 		value = -value;
+		chk = 1;
 	}
 	while (temp != 0)
 	{
 		temp /= 10;
 		len++;
 	}
-	str = malloc(len + 1);
+	len += chk;
 	len--;
+	str = malloc(len + chk + 1);
+	if (chk)
+		str[0]='-';
+		
 	str[len + 1] = '\0';
-	for (;len >= 0; len--)
+	for (;len >= chk; len--)
 	{
 		dec = value % 10;
 		if (dec >= 0 && dec <= 9)
