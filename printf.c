@@ -1,11 +1,9 @@
 #include "main.h"
 
-
-
 /**
  * _printf - function that produces output according to a format
  * same as original printf
- * 
+ *
  * @format: format is a character string.
  * The format string is composed of zero or more directives
  * Return: number of bytes printed
@@ -47,6 +45,8 @@ int _printf(const char *format, ...)
 				i += _strlen(str);
 				j++;
 			}
+			else
+				buf[i] = '%';
 		}
 		else
 		{
