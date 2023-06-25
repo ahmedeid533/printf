@@ -28,7 +28,7 @@ int get_size(int len, const char *format, va_list args)
 			{
 				value = va_arg(args, int);
 				str = from_int_to_string(value);
-				size += _strlen(str) + 1;
+				size += _strlen(str);
 			}
 			else
 				size += 2;
