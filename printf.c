@@ -18,15 +18,14 @@ int _printf(const char *format, ...)
 
 	len = _strlen(format);
 	va_start(args, format);
-	size = get_size(len, format, args);
+	size = get_size(len - 2, format, args);
 	va_end(args);
 	buf = malloc(size + 1);
 	va_start(args, format);
 	fill_buf(size , format, args, &buf[0]);
 	va_end(args);
 	buf[size] = '\0';
-	write(1, &buf[0], size + 1);
-	return (size);
+	return (write(1, &buf[0], size));
 }
 /**
  * from_int_to_string - convert from decimal to tring
