@@ -20,10 +20,9 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	size = get_size(len, format, args);
 	va_end(args);
-	size++;
-	buf = malloc(size);
+	buf = malloc(size + 1);
 	va_start(args, format);
-	fill_buf(size, format, args, &buf[0]);
+	fill_buf(size , format, args, &buf[0]);
 	va_end(args);
 	buf[size] = '\0';
 	return (write(1, &buf[0], size + 1));
