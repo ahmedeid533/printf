@@ -24,30 +24,8 @@ int _printf(const char *format, ...)
 
 	len = _strlen(format);
 	va_start(args, format);
-	for (i = 0; i <= len; i++)
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			if (format[i] == '%')
-			{
-				size++;
-			}
-			else if (format[i] == 'd' || format[i] == 'i')
-			{
-				value = va_arg(args, int);
-				if (value < 0)
-					size++;
-				str = from_int_to_string(value);
-				size += _strlen(str);
-			}
-		}
-		else
-		{
-			size++;
-		}
-	}
 	va_end(args);
+	size += get_size(len, format, args);
 	size++;
 	buf = malloc(size);
 	va_start(args, format);
