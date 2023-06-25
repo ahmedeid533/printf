@@ -22,45 +22,19 @@ int _printf(const char *format, ...)
 
 	len = _strlen(format);
 	va_start(args, format);
-	va_end(args);
 	size = get_size(len, format, args);
+	va_end(args);
 	size++;
 	buf = malloc(size);
 	va_start(args, format);
-	for (i = 0, j = 0; i <= size; i++)
-	{
-		if (format[j] == '%')
-		{
-			j++;
-			if (format[j] == '%')
-			{
-				j++;
-				buf[i] = '%';
-			}
-			else if (format[j] == 'd' || format[j] == 'i')
-			{
-				value = va_arg(args, int);
-				str = from_int_to_string(value);
-				str_concat(i, buf, str);
-				i += _strlen(str);
-				j++;
-			}
-			else
-				buf[i] = '%';
-		}
-		else
-		{
-			buf[i] = format[j];
-			j++;
-		}
-	}
+	fill_buf(size, format, args, &buf[0]);
 	va_end(args);
 	buf[size] = '\0';
 	return (write(1, &buf[0], size + 1));
 }
 /**
  * from_int_to_string - convert from decimal to tring
- * 
+ *
  * @value: the value in decimal passed
  * Return: string
  */
@@ -86,10 +60,9 @@ char *from_int_to_string(int value)
 	len--;
 	str = malloc(len + 2);
 	if (chk)
-		str[0]='-';
-		
+		str[0] = '-';
 	str[len + 1] = '\0';
-	for (;len >= chk; len--)
+	for (len; len >= chk; len--)
 	{
 		dec = value % 10;
 		if (dec >= 0 && dec <= 9)
@@ -119,15 +92,18 @@ void str_concat(int pos, char *str1, char *str2)
 	}
 }
 /**
- * 
- * 
+ * _strlen - srting length
+ *
+ * @str: string
+ * Return: length
  */
 int _strlen(const char *str)
 {
-	 int i = 0;
-	 while (str[i] != '\0')
-	 {
-		 i++;
-	 }
-	 return (i);
+	int i = 0;
+
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
