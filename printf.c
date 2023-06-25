@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 	va_end(args);
 	buf = malloc(size + 1);
 	va_start(args, format);
-	fill_buf(size , format, args, &buf[0]);
+	fill_buf(size, format, args, &buf[0]);
 	va_end(args);
 	return (write(1, &buf[0], size));
 }
