@@ -15,10 +15,6 @@ int _printf(const char *format, ...)
 	int size;
 	va_list args;
 	int len = 0;
-	int i;
-	int j;
-	int value;
-	char *str;
 
 	len = _strlen(format);
 	va_start(args, format);
@@ -62,7 +58,7 @@ char *from_int_to_string(int value)
 	if (chk)
 		str[0] = '-';
 	str[len + 1] = '\0';
-	for (len; len >= chk; len--)
+	for (; len >= chk; len--)
 	{
 		dec = value % 10;
 		if (dec >= 0 && dec <= 9)
