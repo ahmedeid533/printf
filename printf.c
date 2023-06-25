@@ -84,7 +84,7 @@ char *from_int_to_string(int value)
 	}
 	len += chk;
 	len--;
-	str = malloc(len + chk + 1);
+	str = malloc(len + 2);
 	if (chk)
 		str[0]='-';
 		
