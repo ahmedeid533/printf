@@ -25,7 +25,8 @@ int _printf(const char *format, ...)
 	fill_buf(size , format, args, &buf[0]);
 	va_end(args);
 	buf[size] = '\0';
-	return (write(1, &buf[0], size + 1));
+	write(1, &buf[0], size + 1);
+	return (size);
 }
 /**
  * from_int_to_string - convert from decimal to tring
