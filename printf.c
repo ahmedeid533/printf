@@ -18,13 +18,12 @@ int _printf(const char *format, ...)
 
 	len = _strlen(format);
 	va_start(args, format);
-	size = get_size(len - 2, format, args);
+	size = get_size(len - 1, format, args);
 	va_end(args);
 	buf = malloc(size + 1);
 	va_start(args, format);
 	fill_buf(size , format, args, &buf[0]);
 	va_end(args);
-	buf[size] = '\0';
 	return (write(1, &buf[0], size));
 }
 /**
@@ -52,11 +51,13 @@ char *from_int_to_string(int value)
 		len++;
 	}
 	len += chk;
-	len--;
-	str = malloc(len + 2);
+	if (!value)
+		len = 1;
+	str = malloc(len + 1);
 	if (chk)
 		str[0] = '-';
-	str[len + 1] = '\0';
+	str[len] = '\0';
+	len--;
 	for (; len >= chk; len--)
 	{
 		dec = value % 10;

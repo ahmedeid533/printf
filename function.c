@@ -14,7 +14,7 @@ int get_size(int len, const char *format, va_list args)
 	int i, size, value;
 	char *str;
 
-	size = 1;
+	size = 0;
 	for (i = 0; i <= len; i++)
 	{
 		if (format[i] == '%')
@@ -28,8 +28,10 @@ int get_size(int len, const char *format, va_list args)
 			{
 				value = va_arg(args, int);
 				str = from_int_to_string(value);
-				size += _strlen(str);
+				size += _strlen(str) + 1;
 			}
+			else
+				size += 2;
 		}
 		else
 		{
@@ -66,7 +68,7 @@ void fill_buf(int size, const char *format, va_list args, char *buf)
 				value = va_arg(args, int);
 				str = from_int_to_string(value);
 				str_concat(i, buf, str);
-				i += _strlen(str);
+				i += _strlen(str) - 1;
 				j++;
 			}
 			else
