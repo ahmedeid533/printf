@@ -38,9 +38,7 @@ int get_size(int len, const char *format, va_list args)
 				size += 2;
 		}
 		else
-		{
 			size++;
-		}
 	}
 	return (size);
 }
@@ -68,7 +66,6 @@ void fill_buf(int size, const char *format, va_list args, char *buf)
 				str = from_int_to_string(value);
 				str_concat(i, buf, str);
 				i += _strlen(str) - 1;
-				j++;
 			}
 			else if (format[j] == 's')
 			{
